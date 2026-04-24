@@ -10,7 +10,7 @@ export default function Register_New_User(){
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => { // ill need to find why i cant find a current form handling method.
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -18,7 +18,7 @@ const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     try{
         const response = await fetch("http://127.0.0.1:8000/auth/register", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json"}, //just like the documentation and examples
             body: JSON.stringify({username,email,password}),
     });
 
@@ -30,15 +30,15 @@ const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     else{
         setError(data.detail || "Registration failed. Try a different email/username.")
     }} catch (err) {
-      setError("Server error. Is the backend running?");
+      setError("Whoops. Is the backend running?");
     } finally {
       setLoading(false);
     }
   }
     return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12">
+    <div className="min-h-screen flex items-center justify-center py-12">
       <div className="max-w-md w-full mx-4">
-        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-sm p-8">
+        <div className="bg-white/40 backdrop-blur-md rounded-3xl shadow-sm p-8">
           <h1 className="text-4xl font-bold text-center mb-2">Create Account</h1>
           <p className="text-center text-gray-600 mb-8">Join Nails by Mykala</p>
 

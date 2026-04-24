@@ -40,7 +40,7 @@ export default function Navbar() {
             <Link href="/contact" className="hover:text-purple-900 transition-colors">Contact</Link>
           </div>
 
-          {/* Right side: Login / Logout */}
+     
           <div className="hidden md:flex items-center gap-4">
             {isLoggedIn ? (
               <button

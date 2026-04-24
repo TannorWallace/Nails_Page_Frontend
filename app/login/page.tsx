@@ -44,8 +44,8 @@ export default function Login(){
 
 
     return(
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12">
-            <div className="max-w-md w-full bg-white rounded-3xl shadow-sm p-10">
+        <div className="min-h-screen flex items-center justify-center py-12">
+            <div className="max-w-md w-full bg-white/60 rounded-3xl shadow-sm p-10">
                 <h1 className="text-4xl font-bold text-center mb-8">Login</h1>
 
                 <form onSubmit={handleLogin} className="space-y-6">
@@ -81,7 +81,7 @@ export default function Login(){
 
                 <p className="text-center mt-8 text-gray-600">
                     Don't have an account?{" "}
-                    <Link href="/register" className="text-pink-600 hover:underline">
+                    <Link href="/register" className="text-purple-600 hover:underline hover:text-purple-800">
                         Register here
                     </Link>
                 </p>
