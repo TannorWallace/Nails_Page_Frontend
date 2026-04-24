@@ -1,8 +1,8 @@
 // app/gallery/page.tsx
-'use client';   // This is the most important line
+'use client';
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import ImageCard from "@/components/ImageCard";
 
 type Image = {
   id: number;
@@ -49,22 +49,12 @@ export default function Gallery() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {images.map((image) => (
-            <Link
+            <ImageCard
               key={image.id}
-              href={`/gallery/${image.id}`}
-              className="group"
-            >
-              <div className="aspect-square bg-black-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <img
-                  src={`http://127.0.0.1:8000${image.image_url}`}
-                  alt={image.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <p className="text-center mt-3 text-sm font-medium text-black-700">
-                {image.title}
-              </p>
-            </Link>
+              id={image.id}
+              title={image.title}
+              image_url={image.image_url}
+            />
           ))}
         </div>
       </div>

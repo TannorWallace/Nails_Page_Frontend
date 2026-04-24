@@ -4,7 +4,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { Smile, Trash2 } from "lucide-react";
+import ImageViewer from "@/components/ImageViewer";
+import CommentSection from "@/components/CommentSection";
 
 type Comment = {
   id: number;
@@ -28,21 +29,18 @@ export default function ImageDetail() {
   const [allImages, setAllImages] = useState<ImageDetail[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Comment form
   const [newComment, setNewComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  // Current user info from JWT
   const [currentUsername, setCurrentUsername] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Decode JWT token
+  // Decode JWT
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
-        console.log("🔑 JWT Payload:", payload);   // ← debug line
         setCurrentUsername(payload.sub || null);
         setIsAdmin(payload.is_admin === true || payload.is_admin === "true");
       } catch (e) {
@@ -51,7 +49,7 @@ export default function ImageDetail() {
     }
   }, []);
 
-  // Fetch image + all images
+  // Fetch data
   useEffect(() => {
     if (!id) return;
 
@@ -69,7 +67,7 @@ export default function ImageDetail() {
   const prevImage = currentIndex > 0 ? allImages[currentIndex - 1] : null;
   const nextImage = currentIndex < allImages.length - 1 ? allImages[currentIndex + 1] : null;
 
-  // Swipe handlers (unchanged)
+  // Swipe handlers
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
@@ -87,7 +85,6 @@ export default function ImageDetail() {
     if (distance < -50 && prevImage) window.location.href = `/gallery/${prevImage.id}`;
   };
 
-  // DELETE COMMENT (owner OR admin)
   const handleDeleteComment = async (commentId: number) => {
     if (!window.confirm("Delete this comment permanently?")) return;
 
@@ -160,9 +157,13 @@ export default function ImageDetail() {
         </Link>
 
         <div className="bg-white/50 backdrop-blur-md rounded-3xl shadow-sm overflow-hidden">
-          <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd} className="select-none">
-            <img src={`http://127.0.0.1:8000${image.image_url}`} alt={image.title} className="w-full" />
-          </div>
+          <ImageViewer
+            imageUrl={image.image_url}
+            title={image.title}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          />
 
           <div className="p-8">
             <h1 className="text-4xl font-bold">{image.title}</h1>
@@ -170,72 +171,30 @@ export default function ImageDetail() {
 
             {/* Previous / Next Buttons */}
             <div className="flex justify-between mt-12">
-              <Link href={prevImage ? `/gallery/${prevImage.id}` : "#"} className={`px-6 py-3 rounded-full border flex items-center gap-2 ${prevImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-white' : 'text-gray-300 pointer-events-none'}`}>
+              <Link
+                href={prevImage ? `/gallery/${prevImage.id}` : "#"}
+                className={`px-6 py-3 rounded-full border flex items-center gap-2 ${prevImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-white' : 'text-gray-300 pointer-events-none'}`}
+              >
                 ← Previous
               </Link>
-              <Link href={nextImage ? `/gallery/${nextImage.id}` : "#"} className={`px-6 py-3 rounded-full border flex items-center gap-2 ${nextImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-white' : 'text-gray-300 pointer-events-none'}`}>
+              <Link
+                href={nextImage ? `/gallery/${nextImage.id}` : "#"}
+                className={`px-6 py-3 rounded-full border flex items-center gap-2 ${nextImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-white' : 'text-gray-300 pointer-events-none'}`}
+              >
                 Next →
               </Link>
             </div>
 
-            {/* Comments */}
-            <div className="mt-12">
-              <h2 className="text-2xl font-semibold mb-6">Comments ({image.comments.length})</h2>
-
-              {image.comments.length > 0 ? (
-                <div className="space-y-6">
-                  {image.comments.map((comment) => {
-                    const isOwner = currentUsername === comment.username;
-                    const canDelete = isOwner || isAdmin;
-
-                    return (
-                      <div key={comment.id} className="bg-white/10 backdrop-blur-md p-6 rounded-2xl flex justify-between items-start">
-                        <div className="flex-1">
-                          <p className="font-medium text-pink-600">{comment.username}</p>
-                          <p className="mt-3 text-gray-700">{comment.text}</p>
-                          <p className="text-xs text-gray-500 mt-4">
-                            {new Date(comment.created_at).toLocaleDateString()}
-                          </p>
-                        </div>
-
-                        {canDelete && (
-                          <button
-                            onClick={() => handleDeleteComment(comment.id)}
-                            className="text-red-500 hover:text-red-700 transition-colors p-2 -mt-1"
-                            title="Delete comment"
-                          >
-                            <Trash2 size={22} />
-                          </button>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p className="text-gray-500 italic">Be the first to comment!<br/> Kind and constructive conversation please.<br/> Its only nail art! <Smile/></p>
-              )}
-            </div>
-
-            {/* Comment Form */}
-            <div className="mt-12 pt-8 border-t">
-              <h3 className="text-xl font-semibold mb-4">Leave a comment</h3>
-              <form onSubmit={handleSubmitComment}>
-                <textarea
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Write your comment here..."
-                  className="bg-white/10 backdrop-blur-md w-full h-28 p-4 border rounded-2xl"
-                  required
-                />
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="mt-4 bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-500 transition-colors disabled:opacity-50"
-                >
-                  {submitting ? "Posting..." : "Post Comment"}
-                </button>
-              </form>
-            </div>
+            <CommentSection
+              comments={image.comments}
+              currentUsername={currentUsername}
+              isAdmin={isAdmin}
+              newComment={newComment}
+              setNewComment={setNewComment}
+              submitting={submitting}
+              onSubmitComment={handleSubmitComment}
+              onDeleteComment={handleDeleteComment}
+            />
           </div>
         </div>
       </div>
