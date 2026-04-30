@@ -12,8 +12,8 @@ export default function ContactInfo() {
         </li>
         <li>
           <strong>Email:</strong><br />
-          <a href="mailto:mykala@nailsbymykala.com" className="text-black hover:underline">
-            mykala@fake-email.com
+          <a href="mailto:Nails@fake-email.com" className="text-black hover:underline">
+            Nails@fake-email.com
           </a>
         </li>
         <li>
