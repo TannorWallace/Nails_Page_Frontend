@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+// import { Menu, X } from "lucide-react"; doesnt work with nextjs 13 app directory for some reason, using react-icons instead
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +65,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-gray-700 hover:text-purple-600 transition-colors"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
 

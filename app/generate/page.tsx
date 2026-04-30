@@ -40,7 +40,7 @@ export default function GeneratePage() {
         },
         body: JSON.stringify({
           model: "grok-imagine-image",
-          prompt: `Professional studio photograph of nail art: ${prompt}. Anatomically correct human hands, Highly detailed, beautiful, commercial photography style, 8k resolution.`,
+          prompt: `Professional studio photograph of nail art: ${prompt}. Anatomically correct human hands, Highly detailed, beautiful, hand painted nail art, no objects in the hand of the generated model, commercial photography style, 8k resolution.`,
           n: 1,
         }),
       });
@@ -70,7 +70,9 @@ export default function GeneratePage() {
   // STRICT LOGIN WALL
   if (!isLoggedIn) {
     return (
+      
       <div className="min-h-screen flex items-center justify-center py-12">
+        
         <div className="max-w-md w-full mx-4 text-center">
           <div className="bg-white/40 backdrop-blur-md rounded-3xl shadow-sm p-10">
             <h2 className="text-3xl font-bold mb-4">AI Nail Art Generator</h2>
@@ -86,7 +88,7 @@ export default function GeneratePage() {
               Log In to Generate
             </Link>
             <p className="text-sm text-gray-500 mt-6">
-              Don&apos;t have an account?{" "}
+              Don't have an account?{" "}
               <Link href="/register" className="text-purple-600 hover:underline">
                 Register here
               </Link>
@@ -105,7 +107,10 @@ export default function GeneratePage() {
         </Link>
 
         <h1 className="text-5xl font-bold text-center mb-3">AI Nail Art Generator</h1>
-        <p className="text-center text-gray-600 mb-5">Powered by Grok Imagine (xAI)</p>
+        <p className="text-center text-gray-600 mb-2">Powered by Grok Imagine (xAI)</p>
+        <p className="text-center text-gray-600">If on a phone, be sure to screenshot your generated images!</p>
+        <p className="text-center text-gray-600">If on a computer, you can right-click and save the image.</p>
+
 
         {imageUrl && (
           <GeneratedImage

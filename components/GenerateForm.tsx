@@ -28,7 +28,7 @@ export default function GenerateForm({
       <button
         onClick={onGenerate}
         disabled={loading || !prompt.trim()}
-        className="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-2xl font-medium text-lg transition-colors"
+        className="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-black py-4 rounded-2xl font-medium text-lg transition-colors"
       >
         {loading ? "Generating..." : "Generate Nail Art"}
       </button>

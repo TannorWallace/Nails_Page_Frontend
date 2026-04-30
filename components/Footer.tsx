@@ -1,7 +1,8 @@
 // components/Footer.tsx
 'use client';
 import Link from "next/link";
-// import { Instagram, Facebook, Twitter } from "lucide-react"; WONT IMPORT (SHRUG)
+// import { Instagram, Facebook, X } from "lucide-react"; //WONT IMPORT (SHRUG)
+import { FaInstagram, FaFacebook, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
     return(
@@ -9,22 +10,22 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           
-          {/* Brand */}
+          {/* Branding catchphrases  */}
           <div>
             <p className="text-1xl text-purple-400 text-center">Nails by Mykala</p>
             <p className="text-gray-400 text-sm mt-1 text-center">Handcrafted with love</p>
           </div>
 
-          {/* Social Media Links */}
+          {/* Links To Social Media Pages */}
           <div className="flex gap-6 text-2xl">
             <a href="https://www.instagram.com/nailsby_mykala" target="_blank" className="hover:text-pink-400 transition-colors">
-              📸
+              <FaInstagram />
             </a>
             <a href="https://facebook.com" target="_blank" className="hover:text-pink-400 transition-colors">
-              👍
+              <FaFacebook />
             </a>
-            <a href="https://twitter.com/nailsby_mykala" target="_blank" className="hover:text-pink-400 transition-colors">
-              🎵
+            <a href="https://x.com//nailsby_mykala" target="_blank" className="hover:text-pink-400 transition-colors">
+              <FaXTwitter />
             </a>
           </div>
 

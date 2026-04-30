@@ -1,5 +1,6 @@
 // app/gallery/page.tsx
 'use client';
+import Link from "next/link";
 
 import { useState, useEffect } from "react";
 import ImageCard from "@/components/ImageCard";
@@ -40,6 +41,9 @@ export default function Gallery() {
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-6xl mx-auto px-6">
+        <Link href="/" className="text-black mb-4 hover:underline inline-block">
+          ← Back to Home
+        </Link>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-black-900">Gallery</h1>
           <p className="text-xl text-black-600 mt-3">

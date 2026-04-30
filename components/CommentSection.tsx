@@ -16,7 +16,7 @@ type CommentSectionProps = {
   newComment: string;
   setNewComment: (value: string) => void;
   submitting: boolean;
-  onSubmitComment: (e: React.FormEvent) => void;
+  onSubmitComment: (e: React.FormEvent) => void; //TODO: find out solve for deprecated type
   onDeleteComment: (commentId: number) => void;
 };
 
@@ -65,13 +65,13 @@ export default function CommentSection({
         </div>
       ) : (
         <p className="text-gray-500 italic">
-          Be the first to comment!<br />
+          Please leave a comment!<br />
           Kind and constructive conversation please.<br />
           Its only nail art! <Smile />
         </p>
       )}
 
-      {/* Comment Form */}
+      {/*form for comments */}
       <div className="mt-12 pt-8 border-t">
         <h3 className="text-xl font-semibold mb-4">Leave a comment</h3>
         <form onSubmit={onSubmitComment}>
@@ -80,13 +80,12 @@ export default function CommentSection({
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Write your comment here..."
             className="bg-white/10 backdrop-blur-md w-full h-28 p-4 border rounded-2xl"
-            required
-          />
+            required/>
+
           <button
             type="submit"
             disabled={submitting}
-            className="mt-4 bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-500 transition-colors disabled:opacity-50"
-          >
+            className="mt-4 bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-500 transition-colors disabled:opacity-50">
             {submitting ? "Posting..." : "Post Comment"}
           </button>
         </form>

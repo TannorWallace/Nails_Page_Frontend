@@ -20,8 +20,7 @@ export default function ContactInfo() {
           <strong>View Services & Book online:</strong><br />
           <a 
             href="https://book.squareup.com/appointments/2ba65931-efa8-4f1c-9408-937d89274a72/location/J87KZKYAF28HM/services?buttonTextColor=ffffff&color=274b3a&locale=en&referrer=so" 
-            className="text-black hover:underline hover:text-purple-600"
-          >
+            className="text-black hover:underline hover:text-purple-600">
             Schedule an Appointment Now!
           </a>
         </li>
