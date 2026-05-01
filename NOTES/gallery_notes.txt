@@ -1,0 +1,42 @@
+'app/gallery/page.tsx' notes
+
+export default function Gallery() { /* Defines the Gallery page component. */
+  const images = [ /* Static array of sample gallery images for the page. */
+    { id: 1, url: "https://picsum.photos/id/1015/600/600", title: "Soft Pink Floral" },
+    { id: 2, url: "https://picsum.photos/id/201/600/600", title: "Glitter Ombre" },
+    { id: 3, url: "https://picsum.photos/id/301/600/600", title: "Matte Black Design" },
+    { id: 4, url: "https://picsum.photos/id/401/600/600", title: "Chrome Hearts" },
+    { id: 5, url: "https://picsum.photos/id/501/600/600", title: "Blue Marble" },
+    { id: 6, url: "https://picsum.photos/id/601/600/600", title: "Gold Accents" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-12"> {/* Full-page wrapper with background and vertical padding. */}
+      <div className="max-w-6xl mx-auto px-6"> {/* Centered content container with horizontal padding. */}
+
+        {/* Page Header */}
+        <div className="text-center mb-12"> {/* Header block for the title and subtitle. */}
+          <h1 className="text-5xl font-bold text-gray-900">Gallery</h1> {/* Main page title. */}
+          <p className="text-xl text-gray-600 mt-3">Browse Mykala&apos;s beautiful nail art designs</p> {/* Subtitle description text. */}
+        </div>
+
+        {/* Dynamic Gallery Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> {/* Responsive grid layout for the gallery items. */}
+          {images.map((image) => (
+            <div key={image.id} className="group"> {/* Gallery item wrapper used for hover group behavior. */}
+              <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"> {/* Image card with rounded corners and hover shadow. */}
+                <img
+                  src={image.url} /* Image source URL. */
+                  alt={image.title} /* Accessible alt text for the image. */
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" /* Makes the image cover the card and slightly scale on hover. */
+                />
+              </div>
+              <p className="text-center mt-3 text-sm font-medium text-gray-700">{image.title}</p> {/* Caption displayed below the image. */}
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  );
+}

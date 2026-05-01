@@ -1,7 +1,7 @@
 // components/Footer.tsx
 'use client';
 import Link from "next/link";
-// import { Instagram, Facebook, X } from "lucide-react"; //WONT IMPORT (SHRUG)
+// import { Instagram, Facebook, X } from "lucide-react"; //WONT IMPORT (SHRUG) 
 import { FaInstagram, FaFacebook, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {

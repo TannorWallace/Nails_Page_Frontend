@@ -1,0 +1,55 @@
+'use client'; /*this line is required for client-side components. It tells Next.js that this is a client-side component */
+
+import Link from "next/link"; /*This line imports Link `Link` enables client-side page transitions without a full page reload.  */
+
+import { useState } from "react"; /*This line imports the `useState` hook from React, which allows us to manage state in a functional component. In this case, we use it to track whether the mobile menu is open or closed. */
+
+import { Menu, X } from "lucide-react";
+/*This line imports the `Menu` and `X` icons from the `lucide-react` library. These icons are used for the hamburger menu button on mobile devices. The `Menu` icon represents the closed state of the menu, while the `X` icon represents the open state. */
+export default function Navbar() { /*This line defines a functional component called `Navbar`. This component will render the navigation bar for the website. */
+  const [isOpen, setIsOpen] = useState(false); /*This line initializes a state variable called `isOpen` with a default value of `false`. The `setIsOpen` function is used to update the value of `isOpen`. When `isOpen` is `true`, the mobile menu will be displayed; when it's `false`, the mobile menu will be hidden. */
+
+  return (/*This block of code returns the JSX that defines the structure and styling of the navigation bar. The `nav` element contains the main structure of the navbar, including the logo, desktop menu, and mobile menu. The `Link` components are used for navigation between different pages of the website. The mobile menu is conditionally rendered based on the value of `isOpen`. */
+    <nav className="bg-white border-b shadow-sm sticky top-0 z-50"> {/*This line defines a `nav` element with several Tailwind CSS classes for styling. The `bg-white` class sets the background color to white, `border-b` adds a bottom border, `shadow-sm` adds a small shadow for depth, `sticky top-0` makes the navbar stick to the top of the viewport when scrolling, and `z-50` ensures that the navbar appears above other elements on the page.*/}
+      <div className="max-w-7xl mx-auto px-6 py-4"> {/*This line defines a `div` that serves as a container for the navbar content. The `max-w-7xl` class limits the maximum width of the container, `mx-auto` centers it horizontally, `px-6` adds horizontal padding, and `py-4` adds vertical padding.*/}
+        <div className="flex justify-between items-center"> {/*This line defines a `div` that uses Flexbox to layout its children. The `flex` class enables Flexbox, `justify-between` spaces the children apart, and `items-center` vertically centers the children within the container. */}
+          
+        {/* Logo */ /*This is a comment indicating that the following code block is for the logo of the website. Comments are used to explain the purpose of code sections and are not rendered in the final output. */}
+          <Link href="/" className="text-2xl font-bold text-pink-600 hover:text-pink-700 transition-colors">{/*This line defines a `Link` component that serves as the logo and links to the homepage ("/"). The `text-2xl` class sets the font size to 2xl, `font-bold` makes the text bold, `text-pink-600` sets the text color to a shade of pink, `hover:text-pink-700` changes the text color to a darker pink on hover, and `transition-colors` adds a smooth transition effect when the color changes. */}
+            Nails by Mykala
+          </Link>
+
+          {/* Desktop Menu */}
+          {/* /*THIS BLOCK BELOW CONTAINS ALL THE DESKTOP MENU ITEMS */ */}
+          <div className="hidden md:flex gap-8 text-base font-medium">
+            <Link href="/" className="hover:text-pink-600 transition-colors">Home</Link>
+            <Link href="/gallery" className="hover:text-pink-600 transition-colors">Gallery</Link>
+            <Link href="/about" className="hover:text-pink-600 transition-colors">About</Link>
+            <Link href="/services" className="hover:text-pink-600 transition-colors">Services</Link>
+            <Link href="/contact" className="hover:text-pink-600 transition-colors">Contact</Link>
+          </div>
+          {/*THIS BLOCK BELOW CONTAINS THE MOBILE MENU ITEMS */}
+          {/* Mobile Hamburger Button */}
+          <button 
+            onClick={() => setIsOpen(!isOpen)} /*This line defines a `button` element that toggles the mobile menu when clicked. The `onClick` handler calls the `setIsOpen` function with the opposite of the current value of `isOpen`, effectively toggling it between `true` and `false`. */
+            className="md:hidden text-gray-700 hover:text-pink-600 transition-colors" /*This line adds Tailwind CSS classes to the button. The `md:hidden` class hides the button on medium and larger screens, `text-gray-700` sets the text color to a shade of gray, `hover:text-pink-600` changes the text color to pink on hover, and `transition-colors` adds a smooth transition effect when the color changes. */
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}{ /*This line conditionally renders either the `X` icon or the `Menu` icon based on the value of `isOpen`. If `isOpen` is `true`, it renders the `X` icon (indicating that the menu is open and can be closed). If `isOpen` is `false`, it renders the `Menu` icon (indicating that the menu is closed and can be opened). The `size={28}` prop sets the size of the icons to 28 pixels. */}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {/*This block of code conditionally renders the mobile menu based on the value of `isOpen`. If `isOpen` is `true`, it displays a vertical list of navigation links. Each link has an `onClick` handler that sets `isOpen` to `false`, which closes the mobile menu when a link is clicked. The menu is styled with Tailwind CSS classes to ensure it looks good on mobile devices. */}
+        {isOpen && (
+          <div className="md:hidden mt-4 py-4 border-t flex flex-col gap-4 text-base font-medium">
+            <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition-colors">Home</Link>
+            <Link href="/gallery" onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition-colors">Gallery</Link>
+            <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition-colors">About</Link>
+            <Link href="/services" onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition-colors">Services</Link>
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="hover:text-pink-600 transition-colors">Contact</Link>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}
