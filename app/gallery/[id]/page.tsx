@@ -53,11 +53,11 @@ export default function ImageDetail() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`http://127.0.0.1:8000/images/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/${id}`)
       .then((res) => res.ok ? res.json() : Promise.reject())
       .then((data: ImageDetail) => setImage(data));
 
-    fetch("http://127.0.0.1:8000/images/")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/`)
       .then((res) => res.json())
       .then((data) => setAllImages(data))
       .finally(() => setLoading(false));
@@ -92,7 +92,7 @@ export default function ImageDetail() {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/comments/${commentId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments/${commentId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -121,7 +121,7 @@ export default function ImageDetail() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/comments/", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comments/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -173,13 +173,13 @@ export default function ImageDetail() {
             <div className="flex justify-between mt-12">
               <Link
                 href={prevImage ? `/gallery/${prevImage.id}` : "#"}
-                className={`px-6 py-3 rounded-full border flex items-center gap-2 ${prevImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-white' : 'text-gray-300 pointer-events-none'}`}
+                className={`px-6 py-3 rounded-full border flex items-center gap-2 ${prevImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-black' : 'text-gray-300 pointer-events-none'}`}
               >
                 ← Previous
               </Link>
               <Link
                 href={nextImage ? `/gallery/${nextImage.id}` : "#"}
-                className={`px-6 py-3 rounded-full border flex items-center gap-2 ${nextImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-white' : 'text-gray-300 pointer-events-none'}`}
+                className={`px-6 py-3 rounded-full border flex items-center gap-2 ${nextImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-black' : 'text-gray-300 pointer-events-none'}`}
               >
                 Next →
               </Link>

@@ -13,7 +13,7 @@ export default function ImageCard({ id, title, image_url }: ImageCardProps) {
     <Link href={`/gallery/${id}`} className="group">
       <div className="aspect-square bg-black-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <img
-          src={`http://127.0.0.1:8000${image_url}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}${image_url}`}
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />

@@ -18,13 +18,13 @@ export default function Footer() {
 
           {/* Links To Social Media Pages */}
           <div className="flex gap-6 text-2xl">
-            <a href="https://www.instagram.com/nailsby_mykala" target="_blank" className="hover:text-pink-400 transition-colors">
+            <a href="https://www.instagram.com/nailsby_mykala" target="_blank" className="hover:text-purple-400 transition-colors">
               <FaInstagram />
             </a>
-            <a href="https://facebook.com" target="_blank" className="hover:text-pink-400 transition-colors">
+            <a href="https://facebook.com" target="_blank" className="hover:text-purple-400 transition-colors">
               <FaFacebook />
             </a>
-            <a href="https://x.com//nailsby_mykala" target="_blank" className="hover:text-pink-400 transition-colors">
+            <a href="https://x.com//nailsby_mykala" target="_blank" className="hover:text-purple-400 transition-colors">
               <FaXTwitter />
             </a>
           </div>

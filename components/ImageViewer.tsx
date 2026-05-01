@@ -23,10 +23,9 @@ export default function ImageViewer({
       className="select-none"
     >
       <img
-        src={`http://127.0.0.1:8000${imageUrl}`}
+        src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
         alt={title}
-        className="w-full"
-      />
+        className="w-full"/>
     </div>
   );
 }

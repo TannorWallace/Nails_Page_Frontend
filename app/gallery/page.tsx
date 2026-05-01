@@ -19,7 +19,7 @@ export default function Gallery() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/images/")
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch images");
         return res.json();
