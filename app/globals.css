@@ -46,6 +46,6 @@ body::before {
   pointer-events: none;
 }
 
-body * {
+/* body * {
   color: #171717 !important;
-}
+} */
