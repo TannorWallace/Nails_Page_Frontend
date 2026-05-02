@@ -1,7 +1,5 @@
-// app/gallery/page.tsx
 'use client';
 import Link from "next/link";
-
 import { useState, useEffect } from "react";
 import ImageCard from "@/components/ImageCard";
 
@@ -19,7 +17,7 @@ export default function Gallery() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-  fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch images");
         return res.json();
@@ -45,8 +43,8 @@ export default function Gallery() {
           ← Back to Home
         </Link>
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-black-900">Gallery</h1>
-          <p className="text-xl text-black-600 mt-3">
+          <h1 className="text-5xl font-bold text-gray-900">Gallery</h1>
+          <p className="text-xl text-gray-600 mt-3">
             Browse Mykala's beautiful nail art designs
           </p>
         </div>

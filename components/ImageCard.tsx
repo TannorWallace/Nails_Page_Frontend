@@ -11,14 +11,14 @@ type ImageCardProps = {
 export default function ImageCard({ id, title, image_url }: ImageCardProps) {
   return (
     <Link href={`/gallery/${id}`} className="group">
-      <div className="aspect-square bg-black-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <img
           src={`${process.env.NEXT_PUBLIC_API_URL}${image_url}`}
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
-      <p className="text-center mt-3 text-sm font-medium text-black-700">
+      <p className="text-center mt-3 text-sm font-medium text-gray-700">
         {title}
       </p>
     </Link>
