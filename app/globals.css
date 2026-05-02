@@ -45,3 +45,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
 }
+
+body * {
+  color: #171717 !important;
+}
