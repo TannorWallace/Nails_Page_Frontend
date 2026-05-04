@@ -20,7 +20,7 @@ export default function Footer() {
             <a href="https://www.instagram.com/nailsby_mykala" target="_blank" className="hover:text-purple-400 transition-colors">
               <FaInstagram />
             </a>
-            <a href="https://facebook.com" target="_blank" className="hover:text-purple-400 transition-colors">
+            <a href="https://www.facebook.com/NailsByMykala/" target="_blank" className="hover:text-purple-400 transition-colors">
               <FaFacebook />
             </a>
             <a href="https://x.com/nailsby_mykala" target="_blank" className="hover:text-purple-400 transition-colors">
