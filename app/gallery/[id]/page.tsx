@@ -147,7 +147,9 @@ export default function ImageDetail() {
   };
 
   if (loading) return <div className="text-center py-20 text-xl">Loading...</div>;
-  if (!image) return <div className="text-center py-20">Image not found</div>;
+
+  // ←←← THIS IS THE IMPORTANT CHECK ←←←
+  if (!image) return <div className="text-center py-20 text-red-600">Image not found</div>;
 
   return (
     <div className="min-h-screen py-12">

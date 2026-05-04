@@ -19,7 +19,9 @@ export default function ImageViewer({
   // So if i do it this way it doesnt break when i switch to a full Cloudinary URL that already has the domain in it, but if it's just a path it will add the API URL in front of it.
   const fullImageUrl = imageUrl.startsWith("http")
     ? imageUrl
-    : `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`;
+    : imageUrl
+    ? `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`
+    : "/static_front_images/placeholder.jpg";
 
 
   return (
