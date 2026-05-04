@@ -42,7 +42,7 @@ export default function Gallery() {
         <Link href="/" className="text-black mb-4 hover:underline inline-block">
           ← Back to Home
         </Link>
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           <h1 className="text-5xl font-bold text-gray-900">Gallery</h1>
           <p className="text-xl text-gray-600 mt-3">
             Browse Mykala's beautiful nail art designs

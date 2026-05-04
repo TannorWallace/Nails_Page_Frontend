@@ -170,7 +170,7 @@ export default function ImageDetail() {
             <p className="text-gray-600 mt-2">{image.artist}</p>
 
             {/* Previous / Next Buttons */}
-            <div className="flex justify-between mt-12">
+            <div className="flex justify-between mt-6">
               <Link
                 href={prevImage ? `/gallery/${prevImage.id}` : "#"}
                 className={`px-6 py-3 rounded-full border flex items-center gap-2 ${prevImage ? 'bg-purple-500 border-gray-300 hover:bg-purple-400 text-black' : 'text-gray-300 pointer-events-none'}`}

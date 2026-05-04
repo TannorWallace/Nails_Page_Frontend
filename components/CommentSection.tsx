@@ -73,7 +73,7 @@ export default function CommentSection({
   };
 
   return (
-    <div className="mt-12">
+    <div className="mt-6">
       <h2 className="text-2xl font-semibold mb-6">Comments ({comments.length})</h2>
 
       {comments.length > 0 ? (
@@ -95,7 +95,7 @@ export default function CommentSection({
                 ) : (
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <p className="font-medium text-pink-600">{comment.username}</p>
+                      <p className="font-medium text-purple-600">{comment.username}</p>
                       <p className="mt-3 text-gray-700">{comment.text}</p>
                       <p className="text-xs text-gray-500 mt-4">
                         {new Date(comment.created_at).toLocaleDateString()}
@@ -137,7 +137,7 @@ export default function CommentSection({
       )}
 
       {/* New Comment Form */}
-      <div className="mt-12 pt-8 border-t">
+      <div className="mt-6 pt-8 border-t">
         <h3 className="text-xl font-semibold mb-4">Leave a comment</h3>
         <form onSubmit={onSubmitComment}>
           <textarea
