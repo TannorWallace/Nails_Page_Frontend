@@ -15,6 +15,13 @@ export default function ImageViewer({
   onTouchMove,
   onTouchEnd,
 }: ImageViewerProps) {
+
+  // So if i do it this way it doesnt break when i switch to a full Cloudinary URL that already has the domain in it, but if it's just a path it will add the API URL in front of it.
+  const fullImageUrl = imageUrl.startsWith("http")
+    ? imageUrl
+    : `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`;
+
+
   return (
     <div
       onTouchStart={onTouchStart}
@@ -23,9 +30,10 @@ export default function ImageViewer({
       className="select-none"
     >
       <img
-        src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
+        // src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
+        src={fullImageUrl}
         alt={title}
-        className="w-full"/>
+        className=" max-w-3xl mx-auto max-h-[75vh] bg-transparent object-contain rounded-3xl shadow-2xl"/>
     </div>
   );
 }
