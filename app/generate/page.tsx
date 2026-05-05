@@ -45,7 +45,7 @@ export default function GeneratePage() {
           **CRITICAL FINGER RULE:**
           - Apply the main nail art style to **all fingers** unless a specific finger is mentioned.
           - If the user specifies a particular finger (example: ring finger, thumb, index finger, etc.) and describes something different for it, apply that special design **only to the mentioned finger(s)**.
-          - Keep all other fingers consistent with the main style described.
+
 
           Highly detailed, commercial photography style, soft natural lighting, clean composition, 8k resolution. 
           Strictly family-friendly, tasteful, and positive imagery only. 
