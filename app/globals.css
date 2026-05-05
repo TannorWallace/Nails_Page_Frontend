@@ -6,12 +6,13 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) { makes mobile too dark, so i commented it out for now, but this is how you would do it if you wanted to support dark mode based on user preference. You can also add a toggle in the UI to switch between light and dark mode by adding a class to the body and then using that class in your CSS to change the colors. */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 /* Background image - keep exactly as you had it */
 body {
@@ -32,7 +33,7 @@ body::before {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0.15;
+  opacity: 0.5;
   z-index: -1;
   pointer-events: none;
 }
