@@ -39,9 +39,9 @@ body::before {
 }
 
 /* FORCE BLACK TEXT ON LIGHT AREAS - but don't break Footer */
-body * {
+/* body * {
   color: #171717;
-}
+} */
 
 /* Allow white text where you intentionally set it (Footer, dark cards, etc.) */
 /* .text-white,
