@@ -41,7 +41,7 @@ export default function GeneratePage() {
         body: JSON.stringify({
           model: "grok-imagine-image",
           prompt: `Professional studio photograph of beautiful, elegant, and tasteful nail art on realistic human hands: ${prompt}. 
-          Highly detailed, commercial photography style, soft lighting, clean composition, 8k resolution. 
+          Highly detailed, commercial photography style, soft lighting, prompt accurate generation, pay attention to fingers specified , clean composition, 8k resolution. 
           Strictly family-friendly, appropriate, and positive imagery only. 
           Absolutely no hate speech, racial slurs, antisemitic content, political messaging, religious symbols, explicit content, violence, or any form of offensive, derogatory, or controversial text or imagery of any kind.`,
                 n: 1,
