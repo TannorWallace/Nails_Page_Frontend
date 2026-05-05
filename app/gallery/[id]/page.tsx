@@ -55,7 +55,8 @@ export default function ImageDetail() {
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/${id}`)
       .then((res) => res.ok ? res.json() : Promise.reject())
-      .then((data: ImageDetail) => setImage(data));
+      .then((data: ImageDetail) => setImage(data))
+      .catch(() => setImage(null));
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/images/`)
       .then((res) => res.json())
@@ -147,8 +148,8 @@ export default function ImageDetail() {
   };
 
   if (loading) return <div className="text-center py-20 text-xl">Loading...</div>;
-
-  // ←←← THIS IS THE IMPORTANT CHECK ←←←
+  
+  // ←←← THIS IS THE LINE YOU ASKED ABOUT ←←←
   if (!image) return <div className="text-center py-20 text-red-600">Image not found</div>;
 
   return (
@@ -160,7 +161,7 @@ export default function ImageDetail() {
 
         <div className="bg-white/50 backdrop-blur-md rounded-3xl shadow-sm overflow-hidden">
           <ImageViewer
-            imageUrl={image.image_url}
+            imageUrl={image.image_url || ""}
             title={image.title}
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
@@ -171,7 +172,6 @@ export default function ImageDetail() {
             <h1 className="text-4xl font-bold">{image.title}</h1>
             <p className="text-gray-600 mt-2">{image.artist}</p>
 
-            {/* Previous / Next Buttons */}
             <div className="flex justify-between mt-6">
               <Link
                 href={prevImage ? `/gallery/${prevImage.id}` : "#"}
