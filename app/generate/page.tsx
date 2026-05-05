@@ -39,18 +39,19 @@ export default function GeneratePage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "grok-imagine-image",
-          prompt: `Professional studio photograph of beautiful, elegant, and tasteful nail art on realistic human hands: ${prompt}.
+        model: "grok-imagine-image",
+        prompt: `Professional studio photograph of realistic human hands with nail art.
 
-          **CRITICAL FINGER RULE:**
-          - Apply the main nail art style to **all fingers** unless a specific finger is mentioned.
-          - If the user specifies a particular finger (example: ring finger, thumb, index finger, etc.) and describes something different for it, apply that special design **only to the mentioned finger(s)**.
+        User request: ${prompt}
+            // OK THIS SHOULD APPLY TO ALL FINGERS UNLESS THE USER SPECIFICALLY ASKS FOR A DIFFERENT DESIGN ON A SPECIFIC FINGER.
+        **STRICT FINGER RULE - FOLLOW THIS EXACTLY:**
+        - If the user asks for something different or special on **any specific finger** (ring finger, thumb, index finger, middle finger, or pinky), apply that special design **ONLY to the mentioned finger(s)**.
+        - All other fingers must remain plain and consistent with the main style described.
+        - Do not add the special design to any finger that was not specifically requested.
 
-
-          Highly detailed, commercial photography style, soft natural lighting, clean composition, 8k resolution. 
-          Strictly family-friendly, tasteful, and positive imagery only. 
-          Absolutely no hate speech, racial slurs, political messaging, religious symbols, explicit content, violence, or any offensive/derogatory text or imagery.`,
-          n: 1,
+        Highly detailed, clean commercial photography style, soft lighting, sharp focus, 8k resolution. 
+        Strictly family-friendly, tasteful, and positive imagery only.`,
+        n: 1,
         }),
       });
 
