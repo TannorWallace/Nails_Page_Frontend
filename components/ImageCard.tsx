@@ -16,7 +16,7 @@ export default function ImageCard({ id, title, image_url }: ImageCardProps) {
 
   return (
     <Link href={`/gallery/${id}`} className="group">
-      <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <img
           src={fullImageUrl}
           alt={title}

@@ -35,7 +35,8 @@ export default function ImageViewer({
         // src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
         src={fullImageUrl}
         alt={title}
-        className="mt-4 max-w-3xl mx-auto max-h-[75vh] object-contain rounded-3xl shadow-2xl"/>
-    </div>
+        className=" w-full max-w-[90vw] md:max-w-4xl mx-auto max-h-[70vh] md:max-h-[80vh] object-contain rounded-3xl shadow-2xl mt-2 mb-2"
+      />
+      </div>
   );
 }

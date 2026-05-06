@@ -149,18 +149,19 @@ export default function ImageDetail() {
 
   if (loading) return <div className="text-center py-20 text-xl">Loading...</div>;
   
-  // ←←← THIS IS THE LINE YOU ASKED ABOUT ←←←
+
   if (!image) return <div className="text-center py-20 text-red-600">Image not found</div>;
 
   return (
     <div className="min-h-screen py-12">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-3xl mx-auto px-6">
         <Link href="/gallery" className="text-black hover:underline mb-8 inline-block">
           ← Back to Gallery
         </Link>
 
-        <div className="bg-white/50 backdrop-blur-md rounded-3xl shadow-sm overflow-hidden">
+        <div className="bg-white/20 backdrop-blur-md rounded-3xl shadow-sm overflow-hidden">
           <ImageViewer
+            
             imageUrl={image.image_url || ""}
             title={image.title}
             onTouchStart={onTouchStart}

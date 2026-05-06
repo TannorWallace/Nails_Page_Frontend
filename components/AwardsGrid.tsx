@@ -3,7 +3,7 @@
 
 export default function AwardsGrid() {
   return (
-    <div className="prose text-lg text-black-700 leading-relaxed text-center mb-12 content-center">
+    <div className="prose text-md text-black-700 leading-relaxed text-center mb-4 content-center">
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div className="grid grid-cols-2 gap-8">
           <img 
