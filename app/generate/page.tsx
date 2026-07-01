@@ -1,4 +1,3 @@
-// app/generate/page.tsx
 'use client';
 
 import { useState, useEffect } from "react";
@@ -32,41 +31,31 @@ export default function GeneratePage() {
     setImageUrl("");
 
     try {
-      const res = await fetch("https://api.x.ai/v1/images/generations", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_GROK_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-        model: "grok-imagine-image",
-        prompt: `Close-up professional studio photograph of realistic human hands showing only nail art on the fingernails.
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        setError("You must be logged in to generate images.");
+        setLoading(false);
+        return;
+      }
 
-        User request: ${prompt}
+      // Call our backend securely
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/ai/generate?prompt=${encodeURIComponent(prompt)}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-        **STRICT RULES - FOLLOW THESE EXACTLY:**
-        - Generate **nail art ONLY**. Nothing else.
-        - Do not show any objects being held, no table settings, no tea party scenes, no props, no background elements.
-        - The only thing visible should be the hands and the nail art on the fingernails.
-        - If the user mentions a specific finger (ring finger, thumb, index, middle, or pinky), apply the special design **ONLY to that finger**. All other fingers must be plain and match the main style.
-
-        Highly detailed, clean commercial photography style, soft lighting, sharp focus, 8k resolution. 
-        Strictly family-friendly, tasteful, and positive imagery only. 
-        Absolutely no hate speech, racial slurs, political messaging, religious symbols, explicit content, violence, or any offensive/derogatory imagery of any kind.`,
-
-        n: 1,
-        }),
-      });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.detail || `HTTP ${res.status}`);
+      }
 
       const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error?.message || `HTTP ${res.status}`);
-
-      if (data.data && data.data[0]?.url) {
-        setImageUrl(data.data[0].url);
-      } else {
-        setError("No image was returned. Try a different prompt.");
-      }
+      setImageUrl(data.image_url);
     } catch (err: any) {
       console.error("❌ Error:", err);
       setError(err.message || "Failed to generate image");
@@ -83,16 +72,14 @@ export default function GeneratePage() {
   // STRICT LOGIN WALL
   if (!isLoggedIn) {
     return (
-      
       <div className="min-h-screen flex items-center justify-center py-12">
-        
         <div className="max-w-md w-full mx-4 text-center">
           <div className="bg-white/40 backdrop-blur-md rounded-3xl shadow-sm p-10">
             <h2 className="text-3xl font-bold mb-4">AI Nail Art Generator</h2>
             <p className="text-gray-600 mb-8">
-              Log in to continue.<br/>
-              Or<br/>
-              Create an account to use this feature.<br />
+              Log in to continue.<br />
+              Or<br />
+              Create an account to use this feature.
             </p>
             <Link
               href="/login"
@@ -115,7 +102,7 @@ export default function GeneratePage() {
   return (
     <div className="min-h-screen bg-white/50 py-12">
       <div className="max-w-2xl mx-auto px-6">
-        <Link href="/" className="text-black hover:underline mb-8 inline-block">
+        <Link href="/" className="text-black hover:underline mb-8 inlineBlock">
           ← Back to Home
         </Link>
 
@@ -123,7 +110,6 @@ export default function GeneratePage() {
         <p className="text-center text-gray-600 mb-2">Powered by Grok Imagine (xAI)</p>
         <p className="text-center text-gray-600">If on a phone, be sure to screenshot your generated images!</p>
         <p className="text-center text-gray-600">If on a computer, you can right-click and save the image.</p>
-
 
         {imageUrl && (
           <GeneratedImage
