@@ -2,24 +2,33 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-// import { Menu, X } from "lucide-react"; doesnt work with nextjs 13 app directory for some reason, using react-icons instead
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check if user is logged in
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     setIsLoggedIn(!!token);
+
+    if (token) {
+      try {
+        // Decode JWT payload to check if user is admin
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setIsAdmin(payload.is_admin === true);
+      } catch (e) {
+        setIsAdmin(false);
+      }
+    }
   }, []);
 
-  // Logout function
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     setIsLoggedIn(false);
-    window.location.href = "/";   // redirect to home
+    setIsAdmin(false);
+    window.location.href = "/";
   };
 
   return (
@@ -28,20 +37,29 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-black-600 hover:text-purple-900 transition-colors">
+          <Link href="/" className="text-2xl font-bold text-black hover:text-purple-900 transition-colors">
             Nails by Mykala
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8 text-base font-medium">
+          <div className="hidden md:flex gap-8 text-base font-medium items-center">
             <Link href="/" className="hover:text-purple-900 transition-colors">Home</Link>
             <Link href="/gallery" className="hover:text-purple-900 transition-colors">Gallery</Link>
             <Link href="/about" className="hover:text-purple-900 transition-colors">About</Link>
-            {/* <Link href="https://book.squareup.com/appointments/2ba65931-efa8-4f1c-9408-937d89274a72/location/J87KZKYAF28HM/services?buttonTextColor=ffffff&color=274b3a&locale=en&referrer=so" className="hover:text-purple-900 transition-colors">Services</Link> */}
             <Link href="/contact" className="hover:text-purple-900 transition-colors">Contact</Link>
+
+            {/* Admin Upload Link - Only visible to admins */}
+            {isLoggedIn && isAdmin && (
+              <Link 
+                href="/admin/upload" 
+                className="bg-white text-purple-700 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-purple-100 transition-colors"
+              >
+                Admin Upload
+              </Link>
+            )}
           </div>
 
-     
+          {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
             {isLoggedIn ? (
               <button
@@ -52,7 +70,9 @@ export default function Navbar() {
               </button>
             ) : (
               <>
-                <Link href="/login" className="bg-purple-500 text-black px-5 py-2 rounded-full hover:bg-purple-700 transition-colors">Login</Link>
+                <Link href="/login" className="bg-purple-500 text-black px-5 py-2 rounded-full hover:bg-purple-700 transition-colors">
+                  Login
+                </Link>
                 <Link href="/register" className="bg-purple-500 text-black px-5 py-2 rounded-full hover:bg-purple-700 transition-colors">
                   Register
                 </Link>
@@ -75,9 +95,19 @@ export default function Navbar() {
             <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-purple-600">Home</Link>
             <Link href="/gallery" onClick={() => setIsOpen(false)} className="hover:text-purple-600">Gallery</Link>
             <Link href="/about" onClick={() => setIsOpen(false)} className="hover:text-purple-600">About</Link>
-            {/* <Link href="https://book.squareup.com/appointments/2ba65931-efa8-4f1c-9408-937d89274a72/location/J87KZKYAF28HM/services?buttonTextColor=ffffff&color=274b3a&locale=en&referrer=so" onClick={() => setIsOpen(false)} className="hover:text-purple-600">Services</Link> */}
             <Link href="/contact" onClick={() => setIsOpen(false)} className="hover:text-purple-600">Contact</Link>
-            
+
+            {/* Admin Upload - Mobile */}
+            {isLoggedIn && isAdmin && (
+              <Link 
+                href="/admin/upload" 
+                onClick={() => setIsOpen(false)}
+                className="bg-purple-500 text-black px-4 py-2 rounded-full text-center font-semibold"
+              >
+                Admin Upload
+              </Link>
+            )}
+
             <div className="pt-4 border-t">
               {isLoggedIn ? (
                 <button onClick={() => { handleLogout(); setIsOpen(false); }} className="text-black-900">
